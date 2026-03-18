@@ -1,0 +1,38 @@
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: openhexa_postgres
+    environment:
+      POSTGRES_USER: openhexa
+      POSTGRES_PASSWORD: openhexa
+      POSTGRES_DB: openhexa_kpis
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  etl:
+    build: ./etl
+    container_name: openhexa_etl
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql://openhexa:openhexa@postgres:5432/openhexa_kpis
+    command: python main.py
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: openhexa_grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+volumes:
+  postgres_data:
+  grafana_data:

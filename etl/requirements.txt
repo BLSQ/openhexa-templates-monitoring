@@ -1,0 +1,4 @@
+openhexa-sdk
+psycopg2-binary
+pandas
+sqlalchemy
