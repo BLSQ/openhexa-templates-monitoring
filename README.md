@@ -86,8 +86,8 @@ The goal is to answer key business questions:
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repo-url>
-cd <repo-name>
+git clone https://github.com/BLSQ/openhexa-templates-monitoring.git
+cd openhexa-templates-monitoring
 ```
 
 ---
